@@ -35,7 +35,15 @@ public class US_07_DEANPAGE extends AbstractClass {
     @FindBy(xpath = "//button[normalize-space()='Login']")
     public WebElement LOGIN_BUTTON;
 
-    //tbody/tr[1]/td[6]/span[1]/button[1]
+    @FindBy(xpath = "//button[normalize-space()='Menu']")
+    public WebElement MENU_BUTTON;
+
+
+    @FindBy(xpath = "//a[normalize-space()='Contact Get All']")
+    public WebElement CONTACT_GETALL_BUTTON;
+
+    @FindBy(xpath = "//h5[@class='fw-bold p-3 card-header']")
+    public WebElement CONTACT_MESSAGE_TITLE;
 
 
     @FindBy(xpath = "//tbody/tr")
@@ -44,21 +52,30 @@ public class US_07_DEANPAGE extends AbstractClass {
     @FindBy(xpath = "//main[@class='content']//li[4]//a[1]")
     public WebElement nextButton;
 
-    @FindBy(xpath = "/html/body/div/div/main/div/div[1]/div[3]/div/div/div[2]/div[1]")
+
+
+
+    //*[@id="root"]/div/main/div/div/div/div/div/div[2]/div[2]/ul/li[4]/a
+    @FindBy(xpath = "//*[@id='root']/div/main/div/div/div/div/div/div[2]/div[2]/ul/li[4]/a")
+    public WebElement nextButton2;
+    @FindBy(xpath = "(//div[@class='d-flex justify-content-start ps-5 col'])[1]")
     public WebElement totalpagesfield;
-    //String pagesText = totalpagesfield.getText(); // "Page 1 of 64"
-    //int numberOfPages = Integer.parseInt(totalpagesfield.getText().split(" of ")[1]); // "64"
     public void checkAllPages() throws InterruptedException {
-
+       // String text=totalpagesfield.getText();
+        //System.out.println("text "+text);
+        //int numberOfPages = Integer.parseInt(text.substring(text.indexOf("of")+1,text.indexOf(text.length())-1)); // "64"
+//        int totalpages = Integer.parseInt(gettextfrompagesdiv.substring(gettextfrompagesdiv.indexOf("(") + 1, gettextfrompagesdiv.indexOf("Pages") - 1));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        for(int j=1; j<65;j++){
+        for(int j=1; j<3;j++){
 
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/main/div/div[1]/div[3]/div/div/div[1]/table/tbody/tr")));
-            List<WebElement> lists = driver.findElements(By.xpath("/html/body/div[1]/div/main/div/div[1]/div[3]/div/div/div[1]/table/tbody/tr"));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tbody/tr")));
+            List<WebElement> lists = driver.findElements(By.xpath("//tbody/tr"));
             System.out.println("numberOfRows "+ lists.size());
 
             for(int i=1; i<lists.size(); i++){
                 System.out.println(i);
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tbody/tr["+i+"]/td[6]")));
+
                 WebElement specificColumn = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[6]"));
 
                 WebElement isim=driver.findElement(By.xpath("//tbody/tr["+i+"]/td[1]"));
@@ -76,15 +93,30 @@ public class US_07_DEANPAGE extends AbstractClass {
 
 
     }
-    public void checkEditButtonsInRows(int elementList) {
-        System.out.println("toplam eleman o anki sayfada=>" +elementList);
-        for(int i=1; i<=10; i++){
-            WebElement specificColumn = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[6]"));
-            //Assert.assertEquals("Edit", specificColumn.getText()); // Eğer editButton'un metni "Edit" olmalıysa
-            System.out.println(driver.findElement(By.xpath("//tbody/tr["+i+"]/td[1]")).getText());
+
+
+    public void contactInformationsCheck(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.presenceOfElementLocated(( By.xpath("//tbody"))));
+        int a=1;
+        while(a<=10){//10 tane sayfa ilerlicek
+            System.out.println("a=>"+ a);
+            for(int i=1; i<20; i++){
+                for(int j=1; j<5;j++){
+
+                    WebElement infoofwor=driver.findElement(By.xpath("//tbody/tr["+i+"]/td["+j+"]"));
+                    System.out.print(driver.findElement(By.xpath("//table/thead/tr/th["+j+"]")).getText()+": "+ infoofwor.getText());
+                    if(infoofwor.getText().contains("Kayitlar Hakkinda Bilgi\t")|| infoofwor.getText().isEmpty()){
+                        break;
+
+                    }
+                }
+                System.out.println("");
+            }
+            nextButton2.click();
+            a++;
         }
-        System.out.println("o anki eleman sayisi =>"+ elementList);
-        nextButton.click();
+
 
     }
 

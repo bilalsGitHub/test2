@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 import pages.US_07_DEANPAGE;
 import utilities.Driver;
 
@@ -29,9 +30,12 @@ public class US_07_STEP_DEFINITIONS extends AbstractClass {
     }
     @Given("the Dean is on the messages page")
     public void the_dean_is_on_the_messages_page() {
+        us07Deanpage.clickFunktion(us07Deanpage.MENU_BUTTON);
+        us07Deanpage.clickFunktion(us07Deanpage.CONTACT_GETALL_BUTTON);
     }
    @When("the Dean views the list of messages")
     public void the_dean_views_the_list_of_messages() {
+       Assert.assertTrue(us07Deanpage.isThisVisible(us07Deanpage.CONTACT_MESSAGE_TITLE));
     }
     @Then("the Dean should see the edit button for each message")
     public void the_dean_should_see_the_edit_for_each_message() throws InterruptedException {
@@ -39,10 +43,10 @@ public class US_07_STEP_DEFINITIONS extends AbstractClass {
     }
     @Then("the Dean should see message details including authors, emails, sending dates, and subject information")
     public void the_dean_should_see_message_details_including_authors_emails_sending_dates_and_subject_information() {
+        //burada gene liste kontrolü var if break yapabilirsin unutma
+        us07Deanpage.contactInformationsCheck();
     }
-    @Then("the Dean should be able to delete a selected message")
-    public void the_dean_should_be_able_to_delete_a_selected_message() {
-    }
+
     @Then("close the browser")
     public void close_the_browser() {
         driver.close();
