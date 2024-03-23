@@ -1,18 +1,16 @@
 package pages;
 
 import PageObjectModel.AbstractClass;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 
 import utilities.Driver;
 
-public class Orange_HRM extends AbstractClass {
+public class Page_Orange_HRM extends AbstractClass {
 
-    public Orange_HRM(){
+    public Page_Orange_HRM(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
@@ -28,6 +26,10 @@ public class Orange_HRM extends AbstractClass {
 
     @FindBy(xpath = "//img[@alt='company-branding']")
     public WebElement pagelogo;
+
+    public void sendsendstoinputfield(){
+        sendKeysFunktion(USERNAME_INPUT,"username123");
+    }//bu sekilde de yazabilirsin
 
 
 

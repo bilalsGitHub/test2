@@ -10,6 +10,7 @@ public class Driver {
         if(driver==null){
                 driver=new ChromeDriver();
         }
+        System.out.println("olustu mu?");
         return driver;
     }
 

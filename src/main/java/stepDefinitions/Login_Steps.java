@@ -1,13 +1,11 @@
 package stepDefinitions;
 
 import PageObjectModel.AbstractClass;
-import dev.failsafe.internal.util.Assert;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pages.Orange_HRM;
+import pages.Page_Orange_HRM;
 import utilities.Driver;
 
 import java.time.Duration;
@@ -16,7 +14,7 @@ public class Login_Steps extends AbstractClass {
 
         private WebDriver driver;
 
-    Orange_HRM orangeHrm = new Orange_HRM();
+    Page_Orange_HRM orangeHrm = new Page_Orange_HRM();
 
 
 
@@ -32,7 +30,7 @@ public class Login_Steps extends AbstractClass {
     @Given("type loginusername")
     public void type_loginusername() {
     orangeHrm.sendKeysFunktion(orangeHrm.USERNAME_INPUT, "Admin");
-
+        //orangeHrm.sendsendstoinputfield();
     }
     @Given("type password")
     public void type_password() {

@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import utilities.Driver;
 
 import java.time.Duration;
@@ -60,13 +61,15 @@ public class US_07_DEANPAGE extends AbstractClass {
     public WebElement nextButton2;
     @FindBy(xpath = "(//div[@class='d-flex justify-content-start ps-5 col'])[1]")
     public WebElement totalpagesfield;
+
+
     public void checkAllPages() throws InterruptedException {
        // String text=totalpagesfield.getText();
         //System.out.println("text "+text);
         //int numberOfPages = Integer.parseInt(text.substring(text.indexOf("of")+1,text.indexOf(text.length())-1)); // "64"
 //        int totalpages = Integer.parseInt(gettextfrompagesdiv.substring(gettextfrompagesdiv.indexOf("(") + 1, gettextfrompagesdiv.indexOf("Pages") - 1));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        for(int j=1; j<3;j++){
+        for(int j=1; j<65;j++){
 
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tbody/tr")));
             List<WebElement> lists = driver.findElements(By.xpath("//tbody/tr"));
@@ -107,6 +110,8 @@ public class US_07_DEANPAGE extends AbstractClass {
                     WebElement infoofwor=driver.findElement(By.xpath("//tbody/tr["+i+"]/td["+j+"]"));
                     System.out.print(driver.findElement(By.xpath("//table/thead/tr/th["+j+"]")).getText()+": "+ infoofwor.getText());
                     if(infoofwor.getText().contains("Kayitlar Hakkinda Bilgi\t")|| infoofwor.getText().isEmpty()){
+                        SoftAssert softAssert=new SoftAssert();
+                        softAssert.assertFalse(true,infoofwor.getText()+"boş eleman bulundu");
                         break;
 
                     }

@@ -23,6 +23,8 @@ public abstract class AbstractClass {
     clickelement.click();
     }
 
+
+
     public void sendKeysFunktion(WebElement sendkeyselement,String value){
         webDriverWait.until(ExpectedConditions.visibilityOf(sendkeyselement));
 
@@ -49,5 +51,18 @@ public abstract class AbstractClass {
 
         }
     }
+
+    public void Assertion(WebElement actual,String expected){
+    webDriverWait.until(ExpectedConditions.visibilityOf(actual));
+
+    Assert.assertEquals(actual.getText(),expected);
+
+    System.out.println("My Message: "+actual.getText());
+
+
+
+    }
+
+
 
 }

@@ -17,6 +17,9 @@ public class US_07_STEP_DEFINITIONS extends AbstractClass {
         US_07_DEANPAGE us07Deanpage=new US_07_DEANPAGE();
     private WebDriver driver;
 
+
+
+
     @Given("login as a dean")
     public void login_as_a_dean() {
         driver= Driver.getDriver();
@@ -24,8 +27,8 @@ public class US_07_STEP_DEFINITIONS extends AbstractClass {
         driver.get("https://managementonschools.com/login");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        us07Deanpage.sendKeysFunktion(us07Deanpage.USERNAME_INPUT,"DeanSinan01");
-        us07Deanpage.sendKeysFunktion(us07Deanpage.PASSWORD_INPUT,"Sinan123.");
+        us07Deanpage.sendKeysFunktion(us07Deanpage.USERNAME_INPUT,"username");
+        us07Deanpage.sendKeysFunktion(us07Deanpage.PASSWORD_INPUT,"password");
         us07Deanpage.clickFunktion(us07Deanpage.LOGIN_BUTTON);
     }
     @Given("the Dean is on the messages page")
@@ -33,7 +36,7 @@ public class US_07_STEP_DEFINITIONS extends AbstractClass {
         us07Deanpage.clickFunktion(us07Deanpage.MENU_BUTTON);
         us07Deanpage.clickFunktion(us07Deanpage.CONTACT_GETALL_BUTTON);
     }
-   @When("the Dean views the list of messages")
+   @When("the Dean views the list of mes9sages")
     public void the_dean_views_the_list_of_messages() {
        Assert.assertTrue(us07Deanpage.isThisVisible(us07Deanpage.CONTACT_MESSAGE_TITLE));
     }
